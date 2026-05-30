@@ -23,6 +23,13 @@ public class EnemyDamage : MonoBehaviour
             // Se alcanzamos o número máximo de impactos, destruímos ao inimigo
             if (hitCount >= HITS_TO_DIE)
             {
+                // Notificar ao spawner (se existe) antes de destruír
+                EnemySpawner spawner = FindFirstObjectByType<EnemySpawner>();
+                if (spawner != null)
+                {
+                    spawner.OnEnemyDied();
+                }
+
                 Destroy(gameObject);
             }
         }
